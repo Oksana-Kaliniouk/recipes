@@ -12,6 +12,6 @@
       "amount": "1",
       "measurement" : "tbsp",
      "weight": "14",
-    }, ]
+    } ]
   }
 }
