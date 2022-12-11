@@ -11,7 +11,7 @@
       "thing": "water",
       "amount": "1",
       "measurement" : "tbsp",
-     "weight": "14",
+     "weight": "14"
     } ]
   }
 }
