@@ -1,6 +1,5 @@
 {
-  "food": {
-    "title": "thing",
+    "name": "thing",
     "servings": "5",
     "ingredients": [{
       "thing": "flour",
@@ -13,5 +12,4 @@
       "measurement" : "tbsp",
      "weight": "14"
     } ]
-  }
 }
