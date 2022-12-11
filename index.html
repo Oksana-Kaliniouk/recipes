@@ -1,33 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title</title>
-</head>
-<body>
-<div id="myData"></div>
-<script type="text/javascript">
-    fetch('data.json')
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            appendData(data);
-        })
-        .catch(function (err) {
-            console.log('error: ' + err);
-        });
+<!doctype html>
+<html>
+    <head>
+        <script type="text/javascript" src="data.json"></script>
+        <script type="text/javascript" >
+            function load() {
+                var mydata = JSON.parse(data);
+                console.log(mydata.length);
 
-    function appendData(data) {
-        let mainContainer = document.getElementById("myData");
-        for (let i = 0; i < data.length; i++) {
-            let div = document.createElement("div");
-            div.innerHTML = 'Name: ' + data[i].food ;
-            mainContainer.appendChild(div);
-        }
-    }
-</script>
-</body>
+                var div = document.getElementById('data');
+
+                for(var i = 0;i < mydata.length; i++)
+                {
+                    div.innerHTML = div.innerHTML + "<p class='inner' id="+i+">"+ mydata[i].food +"</p>" + "<br>";
+                }
+            }
+        </script>
+    </head>
+    <body onload="load()">
+        <div id="data">
+
+        </div>
+    </body>
 </html>
