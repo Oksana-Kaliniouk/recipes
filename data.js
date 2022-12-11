@@ -1,4 +1,4 @@
-var data = {
+{
   "food": {
     "title": "thing",
     "servings": "5",
