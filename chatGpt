@@ -1,0 +1,6 @@
+fetch('https://raw.githubusercontent.com/username/repo/branch/data.json')
+  .then(response => response.json())
+  .then(data => {
+    // Generate content from data here
+    console.log(data);
+  });
