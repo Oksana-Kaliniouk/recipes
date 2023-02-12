@@ -9,7 +9,6 @@
       fetch('https://api.github.com/repos/Oksana-Kaliniouk/recipes/contents/data.json')
         .then(response => response.json())
         .then(data => {
-         .then(data => {
             // The file contents are stored in the `content` property of the response, encoded as base64
             const content = atob(data.content);
             // Do something with the file contents (e.g. display them on the page)
