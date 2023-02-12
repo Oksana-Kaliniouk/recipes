@@ -6,10 +6,15 @@
   <body>
     <pre id="json-data"></pre>
     <script>
-      fetch('https://github.com/Oksana-Kaliniouk/recipes/blob/main/data.json')
+      fetch('https://api.github.com/repos/Oksana-Kaliniouk/recipes/contents/main/data.json')
         .then(response => response.json())
         .then(data => {
-          document.getElementById('json-data').innerText = JSON.stringify(data, null, 2)
+         .then(data => {
+            // The file contents are stored in the `content` property of the response, encoded as base64
+            const content = atob(data.content);
+            // Do something with the file contents (e.g. display them on the page)
+            console.log(content);
+           })
         })
     </script>
   </body>
