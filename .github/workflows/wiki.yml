@@ -42,6 +42,7 @@ jobs:
     - name: Commit changes
       run : |
         cd  $GITHUB_WORKSPACE/recipes.wiki
+        echo  ${{ inputs.version_number }} >> $GITHUB_WORKSPACE/recipes.wiki/Home.md
         echo "cat : "
         cat Home.md
         
