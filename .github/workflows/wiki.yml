@@ -1,0 +1,51 @@
+name: Deploy
+
+on: 
+ workflow_dispatch:
+    inputs:
+      region:
+        required: true
+        type: choice
+        options:
+        - us
+        - staging
+        - eu
+        - au
+     
+      version_number:
+        required: true
+        type: string
+      
+      type:
+        required: true
+        type: choice 
+        options:
+        - frontend
+        - backend
+        - optifrontend
+        
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:   
+    - uses: actions/checkout@v2
+      with:
+          repository: ${{github.repository}}.wiki
+          
+    - name: check wiki repo content
+      run: |
+       ls -al
+    - name: edit wiki
+      run: |
+       echo test &gt;&gt; test.md
+    - name: Commit files
+      run: |
+       git config --local user.email "action@github.com"
+       git config --local user.name "GitHub Action"
+       git add .
+       git commit -m "Add changes"
+    - name: Push changes to wiki repo
+      uses: ad-m/github-push-action@master
+      with:
+       repository:  ${{github.repository}}.wiki    # specify the wiki repo and push the update.
+       github_token: ${{ secrets.GITHUB_TOKEN }}
