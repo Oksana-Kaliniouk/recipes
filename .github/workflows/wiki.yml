@@ -36,9 +36,7 @@ jobs:
           repository: 'Oksana-Kaliniouk/recipes.wiki'
           ref: 'master'
           path: 'recipes.wiki'
-    - name: print into wiki
-      run: echo  ${{ inputs.version_number }} $GITHUB_WORKSPACE/recipes.wiki/Home.md
-    
+
     - name: Commit changes
       run : |
         cd  $GITHUB_WORKSPACE/recipes.wiki
@@ -53,6 +51,7 @@ jobs:
         echo "pwd and ls"
         pwd
         ls -a
+        git add Home.md
         git commit -a -m "updating version to ${{ inputs.version_number }}"
         
     - name: Push changes
