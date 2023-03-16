@@ -28,13 +28,27 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:   
-    - uses: actions/checkout@v1
-    - name: edit something
-      run: echo "something"
-     
-    - name: Upload Documentation to Wiki
-      uses: SwiftDocOrg/github-wiki-publish-action@v1
+    - name: Check out repo
+      uses: actions/checkout@v2
+    - name: Check out wiki
+      uses: actions/checkout@v2
       with:
-          path: "data.json"
-      env:
-          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+          repository: 'Oksana-Kaliniouk/recipe.wiki'
+          ref: 'master'
+          path: 'my-repo.wiki'
+    - name: Update summary.md if needed
+      run: ./create-summary.sh $GITHUB_WORKSPACE/my-repo.wiki
+      working-directory: ./my-directory
+    - name: print into wiki
+      run: echo "hello" >>  $GITHUB_WORKSPACE/my-repo.wiki/versions.txt
+    
+    - name: Commit changes
+      run : |
+        git config --local user.email "actions@github.com"
+        git config --local user.name "Github Action"
+        git commit -a -m "updating version to ${{ inputs.version_number }}"
+        
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with: 
+        github_token: ${{secrets.GITHUB_TOKEN}}      
