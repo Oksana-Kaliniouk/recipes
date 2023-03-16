@@ -41,8 +41,11 @@ jobs:
       shell: bash
       run : |
         cd  $GITHUB_WORKSPACE/recipes.wiki
-        cat version.md
-        echo -e "$(date +'%Y-%m-%d %H:%M:%S %Z') $GITHUB_ACTOR deployed to ${{ inputs.region }}-${{ inputs.type }}  version ${{ inputs.version_number }}\n\n$(cat version.md)" > version.md
+        response=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+                "https://api.github.com/users/$GITHUB_USERNAME")
+        name=$(echo "$response" | jq -r '.name')
+        echo "The name of the GitHub user that triggered this action is: $name"
+        echo -e "$(date +'%Y-%m-%d %H:%M:%S %Z') $GITHUB_USERNAME deployed to ${{ inputs.region }}-${{ inputs.type }}  version ${{ inputs.version_number }}\n\n$(cat version.md)" > version.md
         echo  ${{ inputs.version_number }} >> $GITHUB_WORKSPACE/recipes.wiki/Home.md       
         git config --local user.email "actions@github.com"
         git config --local user.name "Github Action"
