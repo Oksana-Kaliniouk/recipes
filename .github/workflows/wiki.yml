@@ -40,19 +40,12 @@ jobs:
     - name: Commit changes
       run : |
         cd  $GITHUB_WORKSPACE/recipes.wiki
-        echo  ${{ inputs.version_number }} >> $GITHUB_WORKSPACE/recipes.wiki/Home.md
-        echo "cat : "
-        cat Home.md
-        
+        echo  ${{ inputs.version_number }} >> $GITHUB_WORKSPACE/recipes.wiki/Home.md       
         git config --local user.email "actions@github.com"
         git config --local user.name "Github Action"
-        echo "status: "
-        git status
-        echo "pwd and ls"
-        pwd
-        ls -a
         git add Home.md
         git commit -a -m "updating version to ${{ inputs.version_number }}"
+        git push
         
     - name: Push changes
       uses: ad-m/github-push-action@master
