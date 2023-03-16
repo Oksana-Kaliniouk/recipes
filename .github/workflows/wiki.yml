@@ -37,7 +37,7 @@ jobs:
        ls -al
     - name: edit wiki
       run: |
-       echo test &gt;&gt; test.md
+       echo test >>  test.md
     - name: Commit files
       run: |
        git config --local user.email "action@github.com"
