@@ -28,24 +28,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:   
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
+    - name: edit something
+      run: echo "something"
+     
+    - name: Upload Documentation to Wiki
+      uses: SwiftDocOrg/github-wiki-publish-action@v1
       with:
-          repository: ${{github.repository}}.wiki
-          
-    - name: check wiki repo content
-      run: |
-       ls -al
-    - name: edit wiki
-      run: |
-       echo test >>  test.md
-    - name: Commit files
-      run: |
-       git config --local user.email "action@github.com"
-       git config --local user.name "GitHub Action"
-       git add .
-       git commit -m "Add changes"
-    - name: Push changes to wiki repo
-      uses: ad-m/github-push-action@master
-      with:
-       repository:  ${{github.repository}}.wiki    # specify the wiki repo and push the update.
-       github_token: ${{ secrets.GITHUB_TOKEN }}
+          path: "data.json"
+      env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
