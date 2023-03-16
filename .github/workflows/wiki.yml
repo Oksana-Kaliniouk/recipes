@@ -33,7 +33,7 @@ jobs:
     - name: Check out wiki
       uses: actions/checkout@v2
       with:
-          repository: 'Oksana-Kaliniouk/recipe.wiki'
+          repository: 'Oksana-Kaliniouk/recipes.wiki'
           ref: 'master'
           path: 'my-repo.wiki'
     - name: Update summary.md if needed
