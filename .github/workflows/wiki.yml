@@ -40,10 +40,11 @@ jobs:
     - name: Commit changes
       run : |
         cd  $GITHUB_WORKSPACE/recipes.wiki
+        echo -e '${{ inputs.region }}-${{ inputs.type }}  deployment ${{ inputs.version_number }}\n$(cat version.md)' > version.md
         echo  ${{ inputs.version_number }} >> $GITHUB_WORKSPACE/recipes.wiki/Home.md       
         git config --local user.email "actions@github.com"
         git config --local user.name "Github Action"
-        git add Home.md
+        git add version.md
         git commit -a -m "updating version to ${{ inputs.version_number }}"
         git push
         
