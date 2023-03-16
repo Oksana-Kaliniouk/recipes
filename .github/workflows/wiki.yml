@@ -41,7 +41,7 @@ jobs:
       shell: bash
       run : |
         cd  $GITHUB_WORKSPACE/recipes.wiki
-        echo -e "$(date) $GITHUB_ACTOR deployed to ${{ inputs.region }}-${{ inputs.type }}  version ${{ inputs.version_number }}\n$(cat version.md)' > version.md
+        echo -e "$(date) $GITHUB_ACTOR deployed to ${{ inputs.region }}-${{ inputs.type }}  version ${{ inputs.version_number }}\n$(cat version.md)" > version.md
         echo  ${{ inputs.version_number }} >> $GITHUB_WORKSPACE/recipes.wiki/Home.md       
         git config --local user.email "actions@github.com"
         git config --local user.name "Github Action"
