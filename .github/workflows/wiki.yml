@@ -37,14 +37,19 @@ jobs:
           ref: 'master'
           path: 'recipes.wiki'
     - name: print into wiki
-      run: echo  ${{ inputs.version_number }} $GITHUB_WORKSPACE/recipes.wiki/Deployments.md
+      run: echo  ${{ inputs.version_number }} $GITHUB_WORKSPACE/recipes.wiki/Home.md
     
     - name: Commit changes
       run : |
         cd  $GITHUB_WORKSPACE/recipes.wiki
+        echo "cat : "
+        cat Home.md
+        
         git config --local user.email "actions@github.com"
         git config --local user.name "Github Action"
+        echo "status: "
         git status
+        echo "pwd and ls"
         pwd
         ls -a
         git commit -a -m "updating version to ${{ inputs.version_number }}"
