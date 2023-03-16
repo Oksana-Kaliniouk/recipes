@@ -37,7 +37,7 @@ jobs:
           ref: 'master'
           path: 'recipes.wiki'
     - name: print into wiki
-      run: echo  ${{ inputs.version_number }} >>  $GITHUB_WORKSPACE/recipes.wiki/Deployments.md
+      run: echo  ${{ inputs.version_number }} $GITHUB_WORKSPACE/recipes.wiki/Deployments.md
     
     - name: Commit changes
       run : |
