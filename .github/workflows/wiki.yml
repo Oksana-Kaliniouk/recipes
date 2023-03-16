@@ -35,12 +35,9 @@ jobs:
       with:
           repository: 'Oksana-Kaliniouk/recipes.wiki'
           ref: 'master'
-          path: 'my-repo.wiki'
-    - name: Update summary.md if needed
-      run: ./create-summary.sh $GITHUB_WORKSPACE/my-repo.wiki
-      working-directory: ./my-directory
+          path: 'recipes.wiki'
     - name: print into wiki
-      run: echo "hello" >>  $GITHUB_WORKSPACE/my-repo.wiki/versions.txt
+      run: echo  ${{ inputs.version_number } >>  $GITHUB_WORKSPACE/recipes.wiki/versions.txt
     
     - name: Commit changes
       run : |
