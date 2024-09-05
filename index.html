@@ -3,13 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recipes</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Recipe App</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Recipes</h1>
-  <ul id="recipeList"></ul>
-  <div id="recipeDisplay"></div>
+  <div id="recipeListSection">
+    <h1>Recipe List</h1>
+    <ul id="recipeList"></ul>
+  </div>
+
+  <div id="recipeDetailsSection" style="display: none;">
+    <button id="backButton">Back to List</button>
+    <div id="recipeDisplay"></div>
+  </div>
 
   <script src="script.js"></script>
 </body>
