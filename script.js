@@ -62,10 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
         scaleInput.addEventListener('input', (event) => {
           const scaleFactor = parseFloat(event.target.value) || 1;
           document.getElementById('ingredientList').innerHTML = generateIngredientHTML(data.ingredients, scaleFactor);
+          
+          // Reapply checkbox listeners
+          updateIngredientCheckboxListeners();
         });
-
-        // Add event listeners to checkboxes after scaling
-        updateIngredientCheckboxListeners();
       })
       .catch(error => {
         recipeDisplay.innerHTML = `<p>Failed to load recipe: ${error.message}</p>`;
