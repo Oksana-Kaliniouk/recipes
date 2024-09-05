@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>My JSON Data</title>
-  </head>
-  <body>
-    <pre id="json-data"></pre>
-    <script>
-      fetch('https://api.github.com/repos/Oksana-Kaliniouk/recipes/contents')
-        .then(response => response.json())
-        .then(data => {
-            // The file contents are stored in the `content` property of the response, encoded as base64
-            const content = atob(data.content);
-            // Do something with the file contents (e.g. display them on the page)
-            console.log(content);
-        })
-    </script>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Recipes</h1>
+  <ul id="recipeList"></ul>
+  <div id="recipeDisplay"></div>
+
+  <script src="script.js"></script>
+</body>
 </html>
