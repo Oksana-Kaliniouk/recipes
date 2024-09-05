@@ -4,22 +4,22 @@ body {
   padding: 0;
 }
 
+/* Container for the recipe details section (top-bottom layout) */
 .container {
   display: flex;
+  flex-direction: column; /* Vertical stacking */
   height: 90vh;
   padding: 10px;
   gap: 10px;
 }
 
-/* Ingredient and Steps panels */
+/* Panel for both ingredients and steps */
 .panel {
   flex: 1;
   border: 1px solid #ccc;
   padding: 10px;
-  display: flex;
-  flex-direction: column;
-  resize: vertical; /* Allow vertical resizing */
-  overflow: auto; /* Make each panel scrollable */
+  overflow: auto; /* Allow each panel to be scrollable */
+  resize: vertical; /* Allow panels to be resized vertically */
 }
 
 .ingredients-panel {
@@ -32,14 +32,18 @@ body {
 
 h2 {
   margin-top: 0;
-  font-size: 18px;
 }
 
-/* Style for the back button */
+/* Back button */
 #backButton {
   margin-bottom: 10px;
   padding: 5px 10px;
   cursor: pointer;
+}
+
+/* Styling for the recipe list */
+#recipeListSection {
+  padding: 20px;
 }
 
 #recipeList {
@@ -48,14 +52,17 @@ h2 {
 }
 
 #recipeList li {
-  margin: 10px 0;
   cursor: pointer;
-  color: blue;
+  margin: 5px 0;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
 }
 
 #recipeList li:hover {
-  text-decoration: underline;
+  background-color: #e0e0e0;
 }
+
 
 #recipeDisplay {
   margin-top: 20px;
