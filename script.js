@@ -83,7 +83,7 @@ function generateIngredientHTML(ingredients, scaleFactor) {
   ).join('');
 }
   function formatAmount(amount) {
-  return amount % 1 === 0 ? amount : amount.toFixed(2).replace(/\.00$/, ''); // Remove trailing ".00" if it's a whole number
+  return parseFloat(amount)
 }
 
   // Function to update checkboxes for crossing out ingredients
