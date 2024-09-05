@@ -3,7 +3,7 @@
   "ingredients": [
    {"amount": 50, "measurement": "tsp", "ingridient": "flour"}, 
    {"amount": 300, "measurement": "ml", "ingridient": "water"}, 
-   {"amount': 10, "measurement": "g", "ingridient": "east"}, 
+   {"amount": 10, "measurement": "g", "ingridient": "east"}, 
    {"amount": 10, "measurement": "g", "ingridient": "salt"}, 
   ],
   "steps": [
