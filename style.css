@@ -37,6 +37,11 @@ body {
   margin-right: 10px;
 }
 
+#scaleInput {
+  width: 50px;
+  margin-left: 10px;
+}
+
 label {
   cursor: pointer;
 }
