@@ -105,3 +105,5 @@ document.addEventListener("DOMContentLoaded", () => {
     recipeDetailsSection.style.display = 'none';
   });
 });
+
+
