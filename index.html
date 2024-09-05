@@ -7,14 +7,18 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="recipeListSection">
-    <h1>Recipe List</h1>
-    <ul id="recipeList"></ul>
-  </div>
-
-  <div id="recipeDetailsSection" style="display: none;">
+  <div id="recipeDetailsSection">
     <button id="backButton">Back to List</button>
-    <div id="recipeDisplay"></div>
+    <div class="container">
+      <div class="panel ingredients-panel">
+        <h2>Ingredients</h2>
+        <ul id="ingredientList"></ul>
+      </div>
+      <div class="panel steps-panel">
+        <h2>Steps</h2>
+        <ol id="stepsList"></ol>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
