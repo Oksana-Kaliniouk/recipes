@@ -8,8 +8,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Fetch list of files from GitHub API
   fetch(apiUrl)
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`GitHub API error: ${response.status}`);
+      }
+      return response.json();
+    })
     .then(data => {
+      console.log('GitHub API response:', data);  // Log the response for debugging
+      if (!Array.isArray(data)) {
+        throw new Error('Unexpected API response format');
+      }
+
       const jsonFiles = data.filter(file => file.name.endsWith('.json'));
       jsonFiles.forEach(file => {
         const listItem = document.createElement('li');
@@ -19,13 +29,18 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     })
     .catch(error => {
-      recipeList.innerHTML = `<p>Error loading recipes: ${error}</p>`;
+      recipeList.innerHTML = `<p>Error loading recipes: ${error.message}</p>`;
     });
 
   // Fetch and display recipe
   function displayRecipe(filename) {
     fetch(`./recipes/${filename}`)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error fetching recipe: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => {
         const ingredientsHTML = data.ingredients.map((item, index) =>
           `<li>
@@ -55,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       })
       .catch(error => {
-        recipeDisplay.innerHTML = `<p>Failed to load recipe: ${error}</p>`;
+        recipeDisplay.innerHTML = `<p>Failed to load recipe: ${error.message}</p>`;
       });
   }
 });
