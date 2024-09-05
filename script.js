@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
       recipeList.innerHTML = `<p>Error loading recipes: ${error.message}</p>`;
     });
 
-  // Fetch and display recipe
+  // Function to display recipe
   function displayRecipe(filename) {
     fetch(`./recipes/${filename}`)
       .then(response => {
@@ -42,35 +42,35 @@ document.addEventListener("DOMContentLoaded", () => {
         return response.json();
       })
       .then(data => {
-        const ingredientsHTML = data.ingredients.map((item, index) =>
-          `<li>
-            <input type="checkbox" id="ingredient-${index}" />
-            <label for="ingredient-${index}">${item.amount} ${item.measurement} ${item.ingredient}</label>
-          </li>`
-        ).join('');
+        // Create input field for scaling the ingredients
+        const scaleInputHTML = `
+          <label for="scaleInput">Scale Recipe: </label>
+          <input type="number" id="scaleInput" value="1" min="1" step="1" />
+        `;
 
         recipeDisplay.innerHTML = `
           <h2>${data.title}</h2>
+          ${scaleInputHTML}
           <h3>Ingredients:</h3>
-          <ul id="ingredientList">${ingredientsHTML}</ul>
+          <ul id="ingredientList">${generateIngredientHTML(data.ingredients, 1)}</ul>
           <h3>Steps:</h3>
           <ol>${data.steps.map(step => `<li>${step}</li>`).join('')}</ol>
         `;
 
-        // Add event listeners to checkboxes
-        document.querySelectorAll('#ingredientList input[type="checkbox"]').forEach(checkbox => {
-          checkbox.addEventListener('change', (event) => {
-            const label = event.target.nextElementSibling;
-            if (event.target.checked) {
-              label.style.textDecoration = 'line-through';
-            } else {
-              label.style.textDecoration = 'none';
-            }
-          });
+        // Add event listener to the scale input field
+        const scaleInput = document.getElementById('scaleInput');
+        scaleInput.addEventListener('input', (event) => {
+          const scaleFactor = parseFloat(event.target.value) || 1;
+          document.getElementById('ingredientList').innerHTML = generateIngredientHTML(data.ingredients, scaleFactor);
         });
+
+        // Add event listeners to checkboxes after scaling
+        updateIngredientCheckboxListeners();
       })
       .catch(error => {
         recipeDisplay.innerHTML = `<p>Failed to load recipe: ${error.message}</p>`;
       });
   }
-});
+
+  // Function to generate ingredient HTML
+  function generateIngredientHTML(ingredients, scaleFactor)
