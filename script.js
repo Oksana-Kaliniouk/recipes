@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const recipeListSection = document.getElementById('recipeListSection');
+  const recipeDetailsSection = document.getElementById('recipeDetailsSection');
   const recipeList = document.getElementById('recipeList');
   const recipeDisplay = document.getElementById('recipeDisplay');
+  const backButton = document.getElementById('backButton');
 
   const repoOwner = 'Oksana-Kaliniouk';  // Replace with your GitHub username
   const repoName = 'recipes';  // Replace with your GitHub repository name
@@ -32,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       recipeList.innerHTML = `<p>Error loading recipes: ${error.message}</p>`;
     });
 
-  // Function to display recipe
+  // Function to display recipe and switch view
   function displayRecipe(filename) {
     fetch(`./recipes/${filename}`)
       .then(response => {
@@ -42,51 +45,47 @@ document.addEventListener("DOMContentLoaded", () => {
         return response.json();
       })
       .then(data => {
-        // Create input field for scaling the ingredients
-        const scaleInputHTML = `
-          <label for="scaleInput">Scale Recipe: </label>
-          <input type="number" id="scaleInput" value="1" min="1" step="1" />
-        `;
-
         recipeDisplay.innerHTML = `
           <h2>${data.title}</h2>
-          ${scaleInputHTML}
+          <label for="scaleInput">Scale Recipe: </label>
+          <input type="number" id="scaleInput" value="1" min="1" step="1" />
           <h3>Ingredients:</h3>
           <ul id="ingredientList">${generateIngredientHTML(data.ingredients, 1)}</ul>
           <h3>Steps:</h3>
           <ol>${data.steps.map(step => `<li>${step}</li>`).join('')}</ol>
         `;
 
-        // Add event listener to the scale input field
         const scaleInput = document.getElementById('scaleInput');
         scaleInput.addEventListener('input', (event) => {
           const scaleFactor = parseFloat(event.target.value) || 1;
           document.getElementById('ingredientList').innerHTML = generateIngredientHTML(data.ingredients, scaleFactor);
-          
-          // Reapply checkbox listeners
-          updateIngredientCheckboxListeners();
         });
+
+        // Add checkbox functionality for crossing off ingredients
+        updateIngredientCheckboxListeners();
+
+        // Hide the recipe list and show the recipe details
+        recipeListSection.style.display = 'none';
+        recipeDetailsSection.style.display = 'block';
       })
       .catch(error => {
         recipeDisplay.innerHTML = `<p>Failed to load recipe: ${error.message}</p>`;
       });
   }
 
-function generateIngredientHTML(ingredients, scaleFactor) {
-  return ingredients.map((item, index) =>
-    `<li>
-      <input type="checkbox" id="ingredient-${index}" />
-      <label for="ingredient-${index}">
-        ${formatAmount(item.amount * scaleFactor)} ${item.measurement} ${item.ingredient}
-      </label>
-    </li>`
-  ).join('');
-}
-  function formatAmount(amount) {
-  return parseFloat(amount)
-}
+  // Function to generate ingredient HTML with scaling
+  function generateIngredientHTML(ingredients, scaleFactor) {
+    return ingredients.map((item, index) =>
+      `<li>
+        <input type="checkbox" id="ingredient-${index}" />
+        <label for="ingredient-${index}">
+          ${parseFloat(item.amount * scaleFactor)} ${item.measurement} ${item.ingredient}
+        </label>
+      </li>`
+    ).join('');
+  }
 
-  // Function to update checkboxes for crossing out ingredients
+  // Function to update checkbox listeners for crossing out ingredients
   function updateIngredientCheckboxListeners() {
     document.querySelectorAll('#ingredientList input[type="checkbox"]').forEach(checkbox => {
       checkbox.addEventListener('change', (event) => {
@@ -99,4 +98,10 @@ function generateIngredientHTML(ingredients, scaleFactor) {
       });
     });
   }
+
+  // Back button functionality to switch back to the recipe list view
+  backButton.addEventListener('click', () => {
+    recipeListSection.style.display = 'block';
+    recipeDetailsSection.style.display = 'none';
+  });
 });
