@@ -35,43 +35,17 @@ document.addEventListener("DOMContentLoaded", () => {
       recipeList.innerHTML = `<p>Error loading recipes: ${error.message}</p>`;
     });
 
-  // Function to display recipe and switch view
-  function displayRecipe(filename) {
-    fetch(`./recipes/${filename}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Error fetching recipe: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        recipeDisplay.innerHTML = `
-          <h2>${data.title}</h2>
-          <label for="scaleInput">Scale Recipe: </label>
-          <input type="number" id="scaleInput" value="1" min="1" step="1" />
-          <h3>Ingredients:</h3>
-          <ul id="ingredientList">${generateIngredientHTML(data.ingredients, 1)}</ul>
-          <h3>Steps:</h3>
-          <ol>${data.steps.map(step => `<li>${step}</li>`).join('')}</ol>
-        `;
+function displayRecipe(recipeData) {
+  // Populate ingredients and steps lists
+  const ingredientsHTML = generateIngredientHTML(recipeData.ingredients, 1);
+  const stepsHTML = recipeData.steps.map(step => `<li>${step}</li>`).join('');
 
-        const scaleInput = document.getElementById('scaleInput');
-        scaleInput.addEventListener('input', (event) => {
-          const scaleFactor = parseFloat(event.target.value) || 1;
-          document.getElementById('ingredientList').innerHTML = generateIngredientHTML(data.ingredients, scaleFactor);
-        });
+  document.getElementById('ingredientList').innerHTML = ingredientsHTML;
+  document.getElementById('stepsList').innerHTML = stepsHTML;
 
-        // Add checkbox functionality for crossing off ingredients
-        updateIngredientCheckboxListeners();
-
-        // Hide the recipe list and show the recipe details
-        recipeListSection.style.display = 'none';
-        recipeDetailsSection.style.display = 'block';
-      })
-      .catch(error => {
-        recipeDisplay.innerHTML = `<p>Failed to load recipe: ${error.message}</p>`;
-      });
-  }
+  // Handle ingredient checkbox interaction
+  updateIngredientCheckboxListeners();
+}
 
   // Function to generate ingredient HTML with scaling
   function generateIngredientHTML(ingredients, scaleFactor) {
