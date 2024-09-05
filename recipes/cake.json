@@ -1,0 +1,14 @@
+{
+  "title": "Cake",
+  "ingredients": [
+   {amount: 50, measurement: "tsp", ingridient: "flour"}, 
+       {amount: 300, measurement: "ml", ingridient: "water"}, 
+       {amount: 10, measurement: "g", ingridient: "east"}, 
+       {amount: 10, measurement: "g", ingridient: "salt"}, 
+  ],
+  "steps": [
+    "Mix all ingredients.",
+    "Let the dough rise for 1 hour.",
+    "Bake at 200°C for 30 minutes."
+  ]
+}
