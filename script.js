@@ -73,4 +73,28 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Function to generate ingredient HTML
-  function generateIngredientHTML(ingredients, scaleFactor)
+  function generateIngredientHTML(ingredients, scaleFactor) {
+    return ingredients.map((item, index) =>
+      `<li>
+        <input type="checkbox" id="ingredient-${index}" />
+        <label for="ingredient-${index}">
+          ${(item.amount * scaleFactor).toFixed(2)} ${item.measurement} ${item.ingredient}
+        </label>
+      </li>`
+    ).join('');
+  }
+
+  // Function to update checkboxes for crossing out ingredients
+  function updateIngredientCheckboxListeners() {
+    document.querySelectorAll('#ingredientList input[type="checkbox"]').forEach(checkbox => {
+      checkbox.addEventListener('change', (event) => {
+        const label = event.target.nextElementSibling;
+        if (event.target.checked) {
+          label.style.textDecoration = 'line-through';
+        } else {
+          label.style.textDecoration = 'none';
+        }
+      });
+    });
+  }
+});
