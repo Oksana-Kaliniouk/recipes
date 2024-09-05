@@ -72,17 +72,19 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 
-  // Function to generate ingredient HTML
-  function generateIngredientHTML(ingredients, scaleFactor) {
-    return ingredients.map((item, index) =>
-      `<li>
-        <input type="checkbox" id="ingredient-${index}" />
-        <label for="ingredient-${index}">
-          ${(item.amount * scaleFactor).toFixed(2)} ${item.measurement} ${item.ingredient}
-        </label>
-      </li>`
-    ).join('');
-  }
+function generateIngredientHTML(ingredients, scaleFactor) {
+  return ingredients.map((item, index) =>
+    `<li>
+      <input type="checkbox" id="ingredient-${index}" />
+      <label for="ingredient-${index}">
+        ${formatAmount(item.amount * scaleFactor)} ${item.measurement} ${item.ingredient}
+      </label>
+    </li>`
+  ).join('');
+}
+  function formatAmount(amount) {
+  return amount % 1 === 0 ? amount : amount.toFixed(2).replace(/\.00$/, ''); // Remove trailing ".00" if it's a whole number
+}
 
   // Function to update checkboxes for crossing out ingredients
   function updateIngredientCheckboxListeners() {
