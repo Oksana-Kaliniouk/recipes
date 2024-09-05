@@ -21,3 +21,22 @@ body {
 #recipeDisplay {
   margin-top: 20px;
 }
+
+#ingredientList {
+  list-style-type: none;
+  padding: 0;
+}
+
+#ingredientList li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+#ingredientList input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+label {
+  cursor: pointer;
+}
