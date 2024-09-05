@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const recipeList = document.getElementById('recipeList');
   const recipeDisplay = document.getElementById('recipeDisplay');
 
-  const repoOwner = 'Oksana-Kaliniouk';  // Replace with your GitHub username
-  const repoName = 'recipes';  // Replace with your GitHub repository name
+  const repoOwner = '<your-username>';  // Replace with your GitHub username
+  const repoName = '<your-repository-name>';  // Replace with your GitHub repository name
   const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/recipes`;
 
   // Fetch list of files from GitHub API
@@ -27,16 +27,5 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(`./recipes/${filename}`)
       .then(response => response.json())
       .then(data => {
-        recipeDisplay.innerHTML = `
-          <h2>${data.title}</h2>
-          <h3>Ingredients:</h3>
-          <ul>${data.ingredients.map(item => `<li>${item["amount"]}</li>`).join('')}</ul>
-          <h3>Steps:</h3>
-          <ol>${data.steps.map(step => `<li>${step}</li>`).join('')}</ol>
-        `;
-      })
-      .catch(error => {
-        recipeDisplay.innerHTML = `<p>Failed to load recipe: ${error}</p>`;
-      });
-  }
-});
+        const ingredientsHTML = data.ingredients.map(item =>
+          `<li>${item.amount} ${item.measure
