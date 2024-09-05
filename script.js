@@ -28,4 +28,19 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(response => response.json())
       .then(data => {
         const ingredientsHTML = data.ingredients.map(item =>
-          `<li>${item.amount} ${item.measure
+          `<li>${item.amount} ${item.measurement} ${item.ingredient}</li>`
+        ).join('');
+
+        recipeDisplay.innerHTML = `
+          <h2>${data.title}</h2>
+          <h3>Ingredients:</h3>
+          <ul>${ingredientsHTML}</ul>
+          <h3>Steps:</h3>
+          <ol>${data.steps.map(step => `<li>${step}</li>`).join('')}</ol>
+        `;
+      })
+      .catch(error => {
+        recipeDisplay.innerHTML = `<p>Failed to load recipe: ${error}</p>`;
+      });
+  }
+});
