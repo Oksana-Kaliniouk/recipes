@@ -1,0 +1,14 @@
+{
+  "title": "Bread",
+  "ingredients": [
+    "500g flour",
+    "300ml water",
+    "10g yeast",
+    "10g salt"
+  ],
+  "steps": [
+    "Mix all ingredients.",
+    "Let the dough rise for 1 hour.",
+    "Bake at 200°C for 30 minutes."
+  ]
+}
