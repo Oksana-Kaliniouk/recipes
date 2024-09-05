@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         recipeDisplay.innerHTML = `
           <h2>${data.title}</h2>
           <h3>Ingredients:</h3>
-          <ul>${data.ingredients.map(item => `<li>${item}</li>`).join('')}</ul>
+          <ul>${data.ingredients.map(item => `<li>${item["amount"]}</li>`).join('')}</ul>
           <h3>Steps:</h3>
           <ol>${data.steps.map(step => `<li>${step}</li>`).join('')}</ol>
         `;
