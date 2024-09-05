@@ -1,0 +1,23 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+#recipeList {
+  list-style-type: none;
+  padding: 0;
+}
+
+#recipeList li {
+  margin: 10px 0;
+  cursor: pointer;
+  color: blue;
+}
+
+#recipeList li:hover {
+  text-decoration: underline;
+}
+
+#recipeDisplay {
+  margin-top: 20px;
+}
