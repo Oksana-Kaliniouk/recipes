@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const recipeDisplay = document.getElementById('recipeDisplay');
   const backButton = document.getElementById('backButton');
 
-  const repoOwner = '<your-username>';  // Replace with your GitHub username
-  const repoName = '<your-repository-name>';  // Replace with your GitHub repository name
+  const repoOwner = 'Oksana-Kaliniouk';  // Replace with your GitHub username
+  const repoName = 'recipes';  // Replace with your GitHub repository name
   const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/recipes`;
 
   // Fetch list of files from GitHub API
