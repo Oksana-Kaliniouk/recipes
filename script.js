@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then(data => {
-      console.log('GitHub API response:', data);  // Log the response for debugging
       if (!Array.isArray(data)) {
         throw new Error('Unexpected API response format');
       }
@@ -27,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
       jsonFiles.forEach(file => {
         const listItem = document.createElement('li');
         listItem.textContent = file.name.replace('.json', '');
+        // Attach event listener to each list item to handle clicks
         listItem.addEventListener('click', () => displayRecipe(file.name));
         recipeList.appendChild(listItem);
       });
