@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const recipeDisplay = document.getElementById('recipeDisplay');
   const backButton = document.getElementById('backButton');
 
-  const repoOwner = 'Oksana-Kaliniouk';  // Replace with your GitHub username
-  const repoName = 'recipes';  // Replace with your GitHub repository name
+  const repoOwner = '<your-username>';  // Replace with your GitHub username
+  const repoName = '<your-repository-name>';  // Replace with your GitHub repository name
   const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/recipes`;
 
   // Fetch list of files from GitHub API
@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then(data => {
+      console.log('GitHub API response:', data);  // Log the response for debugging
       if (!Array.isArray(data)) {
         throw new Error('Unexpected API response format');
       }
@@ -26,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
       jsonFiles.forEach(file => {
         const listItem = document.createElement('li');
         listItem.textContent = file.name.replace('.json', '');
-        // Attach event listener to each list item to handle clicks
         listItem.addEventListener('click', () => displayRecipe(file.name));
         recipeList.appendChild(listItem);
       });
